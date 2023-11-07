@@ -1,0 +1,128 @@
+import { Button } from "generic/button.slint";
+
+export component Application inherits Window {
+
+    property <bool> showDebug: true;
+
+    min-width: 300px;
+    min-height: 300px;
+
+    preferred-width: 600px;
+    preferred-height: 450px;
+
+    background: #5583a8;
+
+    verticalLayout := VerticalLayout {
+
+        alignment: space-between;
+
+        padding: 15px;
+
+        horizontalLayout := HorizontalLayout {
+            
+            alignment: space-between;
+
+            Text {
+
+                horizontal-alignment: left;
+                vertical-alignment: top;
+    
+                text: "Flow";
+                font-size: 45px;
+            }
+
+            Button {
+
+                width: horizontalLayout.width/6;
+                height: verticalLayout.height/6;
+
+                background-color: #36548b;
+                border-radius: 18px;
+                
+                Image {
+                    source: @image-url("svg/settings.svg");
+                    colorize: white;
+                }
+
+            }
+
+        }
+
+        Text {
+
+            horizontal-alignment: center;
+
+            text: "25:00";
+            font-size: 50px;
+        }
+
+        HorizontalLayout {
+
+            spacing: 15px;
+
+            height: 85px;
+
+            Button {
+                background-color: #36548b;
+                border-radius: 18px;
+                text: "";
+                font-size: 25px;
+                
+                Image {
+                    source: @image-url("svg/stop--filled.svg");
+                    colorize: white;
+                }
+
+            }
+            
+            Button {
+                background-color: #36548b;
+                border-radius: 18px;
+                text: "";
+                font-size: 25px;
+
+                Image {
+                    source: @image-url("svg/play--filled.svg");
+                    colorize: white;
+                }
+
+            }
+
+            Button {
+                background-color: #36548b;
+                border-radius: 18px;
+                text: "";
+                font-size: 25px;
+
+                Image {
+                    source: @image-url("svg/pause--outline--filled.svg");
+                    colorize: white;
+                }
+
+            }
+
+        }
+
+    }
+
+    // Debug
+    if showDebug : VerticalLayout {
+
+        padding: 5px;
+        spacing: 10px;
+
+        alignment: center;
+
+        Text {
+            color: red;
+            text: "Height: " + verticalLayout.height/1px;
+        }
+    
+        Text {
+            color: red;
+            text: "Width: " + verticalLayout.width/1px;
+        }
+
+    }
+
+}

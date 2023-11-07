@@ -1,0 +1,33 @@
+export component Button inherits Rectangle {
+    
+    in property <color> background-color;
+    //in property <length> b-radius;
+    //in property <color> b-color;
+
+    in property <string> text;
+    in property <length> font-size;
+
+    callback clicked;
+
+    background: area.pressed ? root.background-color.darker(25%) : root.background-color;
+    //border-radius: b-radius;
+    //border-color: b-color;
+
+    area := TouchArea {
+        clicked => {
+            root.clicked();
+        }
+    }
+
+    Text {
+
+        horizontal-alignment: center;
+        vertical-alignment: center;
+
+        text: root.text;
+        font-size: font-size;
+    }
+
+    @children
+
+}
