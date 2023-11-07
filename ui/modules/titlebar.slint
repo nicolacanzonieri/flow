@@ -1,0 +1,30 @@
+import { Button } from "../generic/button.slint";
+
+export component TitleBar inherits HorizontalLayout{
+    
+    alignment: space-between;
+
+        Text {
+
+            horizontal-alignment: left;
+            vertical-alignment: top;
+
+            text: "Flow";
+            font-size: 45px;
+        }
+
+        Button {
+
+            width: root.width/6;
+
+            background-color: #36548b;
+            border-radius: 18px;
+            
+            Image {
+                source: @image-url("../svg/settings.svg");
+                colorize: white;
+            }
+
+        }
+
+}

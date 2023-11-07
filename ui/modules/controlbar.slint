@@ -1,0 +1,46 @@
+import { Button } from "../generic/button.slint";
+
+export component ControlBar inherits HorizontalLayout {
+    
+    spacing: 15px;
+
+    Button {
+        background-color: #36548b;
+        border-radius: 18px;
+        text: "";
+        font-size: 25px;
+            
+        Image {
+            source: @image-url("../svg/stop--filled.svg");
+            colorize: white;
+        }
+
+    }
+            
+    Button {
+        background-color: #36548b;
+        border-radius: 18px;
+        text: "";
+        font-size: 25px;
+
+        Image {
+            source: @image-url("../svg/play--filled.svg");
+            colorize: white;
+        }
+
+    }
+
+    Button {
+        background-color: #36548b;
+        border-radius: 18px;
+        text: "";
+        font-size: 25px;
+
+        Image {
+            source: @image-url("../svg/pause--outline--filled.svg");
+            colorize: white;
+        }
+
+    }
+
+}
