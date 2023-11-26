@@ -1,6 +1,8 @@
 import { Button } from "../generic/button.slint";
 
 export component TitleBar inherits HorizontalLayout{
+
+    callback buttonPressed(string);
     
     alignment: space-between;
 
@@ -10,19 +12,25 @@ export component TitleBar inherits HorizontalLayout{
             vertical-alignment: top;
 
             text: "Flow";
-            font-size: 45px;
+            font-size: 65px;
         }
 
         Button {
 
-            width: root.width/6;
+            width: 30%;
 
-            background-color: #36548b;
+            id: "settings";
+
+            button-color: #36548b;
             border-radius: 18px;
             
             Image {
                 source: @image-url("../svg/settings.svg");
                 colorize: white;
+            }
+
+            clicked => {
+                buttonPressed(self.id);
             }
 
         }

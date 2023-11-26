@@ -1,33 +1,47 @@
 export component Button inherits Rectangle {
-    
-    in property <color> background-color;
-    //in property <length> b-radius;
-    //in property <color> b-color;
 
+    in property <color> button-color;
     in property <string> text;
     in property <length> font-size;
+    in-out property <string> id: "";
 
     callback clicked;
-
-    background: area.pressed ? root.background-color.darker(25%) : root.background-color;
-    //border-radius: b-radius;
-    //border-color: b-color;
-
+    
+    clip:  true;
+    
     area := TouchArea {
         clicked => {
-            root.clicked();
+            clicked();
         }
     }
 
     Text {
-
-        horizontal-alignment: center;
-        vertical-alignment: center;
-
         text: root.text;
         font-size: font-size;
     }
 
-    @children
+    function background-color() -> color {
+        if (area.pressed) {
+            return button-color.darker(25%);
+        } else if (area.has-hover) {
+            return button-color.brighter(25%);
+        } else {
+            return button-color;
+        }
+    }
 
+    background: background-color();
+
+    @children
+}
+
+export component Preview inherits Window {
+    VerticalLayout {
+        padding: 15px;
+
+        Button {
+            button-color: red;
+            border-radius: 15px;
+        }
+    }
 }

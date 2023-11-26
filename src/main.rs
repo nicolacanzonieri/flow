@@ -1,7 +1,31 @@
 slint::include_modules!();
 
 fn main() {
-    Application::new().unwrap().run().unwrap();
+    let app = Application::new().unwrap();
 
-    println!("Hello, world!");
+    app.on_buttonPressed(move |value| {
+        match value.as_str() {
+            "play" => {
+                println!("Play!");
+            },
+
+            "stop" => {
+                println!("Stop!");
+            },
+
+            "pause" => {
+                println!("Pause!");
+            },
+
+            "settings" => {
+                println!("Settings");
+            },
+
+            _ => {
+                // nothing
+            }
+        }
+    });
+
+    app.run().unwrap();
 }

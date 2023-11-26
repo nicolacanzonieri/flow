@@ -1,10 +1,18 @@
+import "font/CoffeCake.ttf";
+import "font/ARCO.ttf";
+import "font/Super Foods.ttf";
+
 import { Button } from "generic/button.slint";
 import { ControlBar } from "modules/controlbar.slint";
 import { TitleBar } from "modules/titlebar.slint";
 
 export component Application inherits Window {
 
+    callback buttonPressed(string);
+
     property <bool> showDebug: true;
+
+    default-font-family: "Super Foods";
 
     min-width: 300px;
     min-height: 300px;
@@ -22,6 +30,10 @@ export component Application inherits Window {
 
         TitleBar {
             height: 15%;
+
+            buttonPressed(id) => {
+                buttonPressed(id);
+            }
         }
 
         Text {
@@ -29,11 +41,15 @@ export component Application inherits Window {
             horizontal-alignment: center;
 
             text: "25:00";
-            font-size: 50px;
+            font-size: 70px;
         }
         
         ControlBar {
             height: 20%;
+
+            buttonPressed(id) => {
+                buttonPressed(id);
+            }
         }
 
     }

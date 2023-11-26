@@ -2,12 +2,15 @@ import { Button } from "../generic/button.slint";
 
 export component ControlBar inherits HorizontalLayout {
     
+    callback buttonPressed(string);
+
     spacing: 15px;
 
     Button {
-        background-color: #36548b;
+        button-color: #36548b;
         border-radius: 18px;
         text: "";
+        id: "stop";
         font-size: 25px;
             
         Image {
@@ -15,12 +18,17 @@ export component ControlBar inherits HorizontalLayout {
             colorize: white;
         }
 
+        clicked => {
+            buttonPressed(self.id);
+        }
+
     }
             
     Button {
-        background-color: #36548b;
+        button-color: #36548b;
         border-radius: 18px;
         text: "";
+        id: "play";
         font-size: 25px;
 
         Image {
@@ -28,17 +36,26 @@ export component ControlBar inherits HorizontalLayout {
             colorize: white;
         }
 
+        clicked => {
+            buttonPressed(self.id);
+        }
+
     }
 
     Button {
-        background-color: #36548b;
+        button-color: #36548b;
         border-radius: 18px;
         text: "";
+        id: "pause";
         font-size: 25px;
 
         Image {
             source: @image-url("../svg/pause--outline--filled.svg");
             colorize: white;
+        }
+
+        clicked => {
+            buttonPressed(self.id);
         }
 
     }
