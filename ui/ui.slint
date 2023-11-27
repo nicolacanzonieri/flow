@@ -5,12 +5,19 @@ import "font/Super Foods.ttf";
 import { Button } from "generic/button.slint";
 import { ControlBar } from "modules/controlbar.slint";
 import { TitleBar } from "modules/titlebar.slint";
+import { SettingsPage } from "modules/settingspage.slint";
 
-export component Application inherits Window {
+export component Flow inherits Window {
+	
+	property <int> backup-minutes: 25;
+	property <int> backup-seconds: 0;
+	property <int> minutes: 25;
+	property <int> seconds: 0;
+	property <bool> timerOn: false;
+	property <bool> settingspage-open: false;
 
     callback buttonPressed(string);
-
-    property <bool> showDebug: true;
+	callback tick(duration);
 
     default-font-family: "Super Foods";
 
@@ -21,6 +28,9 @@ export component Application inherits Window {
     preferred-height: 450px;
 
     background: #5583a8;
+	
+	title: "Flow by Sliced Technologies";
+	no-frame: false;
 
     verticalLayout := VerticalLayout {
 
@@ -32,15 +42,17 @@ export component Application inherits Window {
             height: 15%;
 
             buttonPressed(id) => {
-                buttonPressed(id);
+                if (id == "settings") {
+					settingspage-open = !settingspage-open;
+				}
             }
         }
 
-        Text {
+        clock := Text {
 
             horizontal-alignment: center;
 
-            text: "25:00";
+            text: fixTimeValue(minutes) + ":" + fixTimeValue(seconds);
             font-size: 70px;
         }
         
@@ -48,10 +60,60 @@ export component Application inherits Window {
             height: 20%;
 
             buttonPressed(id) => {
-                buttonPressed(id);
+                if (id == "play") {
+					timerOn = true;
+				} else if (id == "pause") {
+					timerOn = false;
+				} else if (id == "stop") {
+					timerOn = false;
+					minutes = backup-minutes;
+					seconds = backup-seconds;
+				}
             }
         }
 
     }
+	
+	centerPoint := Rectangle {
+		background: transparent;
+	}
+	
+	settingspage := SettingsPage {
+		background: #5583a8.darker(30%);
+		width: 100%;
+		height: 95%;
+		y: settingspage-open ? centerPoint.y + 125px : centerPoint.y + 1000px;
+		border-radius: 10px;
+
+		animate y {
+			delay: 0s;
+			duration: 0.3s;
+			easing: ease-in-out;
+		}
+	}
+	
+	function fixTimeValue(value: int) -> string {
+		if (value < 10) {
+			return "0" + value;
+		} else {
+			return value;
+		}
+	}
+	
+	tick(value) => {
+	
+		if (timerOn) {
+			seconds -= 1;
+		
+			if (seconds < 0) {
+				seconds = 59;
+				minutes -= 1;
+				
+				if (minutes <= 0) {
+					timerOn = false;
+				}
+			}
+		}
+	}
 
 }
