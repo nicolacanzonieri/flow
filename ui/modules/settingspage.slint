@@ -1,6 +1,9 @@
 import { Button } from "../generic/button.slint";
 
 export component SettingsPage inherits Rectangle {
+
+	callback sendMinutes(string);
+	callback sendSeconds(string);
 	
 	VerticalLayout {
 		padding: 11px;
@@ -14,6 +17,58 @@ export component SettingsPage inherits Rectangle {
 			text: "Settings";
 			font-size: 35px;
 		}
+		
+		Rectangle {
+			width: 100%;
+			height: 5%;
+		}
+		
+		HorizontalLayout {
+			alignment: start;
+		
+			Text {
+				horizontal-alignment: left;
+				vertical-alignment: center;
+				text: "Minutes: ";
+				font-size: 20px;
+			}
+			
+			TextInput {
+				width: 75%;
+				font-size: 20px;
+				
+				accepted() => {
+					sendMinutes(self.text);
+				}
+			}
+		}
+		
+		HorizontalLayout {
+			alignment: start;
+			
+			Text {
+				horizontal-alignment: left;
+				vertical-alignment: center;
+				text: "Seconds: ";
+				font-size: 20px;
+			}
+			
+			TextInput {
+				width: 75%;
+				font-size: 20px;
+				
+				accepted() => {
+					sendSeconds(self.text);
+				}
+			}
+		}
+		
+		Text {
+			text: "By Sliced Technologies ~ Nicola Canzonieri";
+			color: white;
+			font-size: 10px;
+		}
+		
 	}
 	
 }

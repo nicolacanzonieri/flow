@@ -9,15 +9,21 @@ import { SettingsPage } from "modules/settingspage.slint";
 
 export component Flow inherits Window {
 	
-	property <int> backup-minutes: 25;
-	property <int> backup-seconds: 0;
+	in property <int> backup-minutes: 25;
+	in property <int> backup-seconds: 0;
+	
 	property <int> minutes: 25;
 	property <int> seconds: 0;
+	
 	property <bool> timerOn: false;
 	property <bool> settingspage-open: false;
 
     callback buttonPressed(string);
 	callback tick(duration);
+	callback sendMinutes(string);
+	callback sendSeconds(string);
+	
+	callback reset;
 
     default-font-family: "Super Foods";
 
@@ -52,7 +58,7 @@ export component Flow inherits Window {
 
             horizontal-alignment: center;
 
-            text: fixTimeValue(minutes) + ":" + fixTimeValue(seconds);
+            text: FixTimeValue(minutes) + ":" + FixTimeValue(seconds);
             font-size: 70px;
         }
         
@@ -90,9 +96,17 @@ export component Flow inherits Window {
 			duration: 0.3s;
 			easing: ease-in-out;
 		}
+		
+		sendMinutes(value) => {
+			sendMinutes(value);
+		}
+		
+		sendSeconds(value) => {
+			sendSeconds(value);
+		}
 	}
 	
-	function fixTimeValue(value: int) -> string {
+	function FixTimeValue(value: int) -> string {
 		if (value < 10) {
 			return "0" + value;
 		} else {
@@ -114,6 +128,11 @@ export component Flow inherits Window {
 				}
 			}
 		}
+	}
+	
+	reset => {
+		minutes = backup-minutes;
+		seconds = backup-seconds;
 	}
 
 }
