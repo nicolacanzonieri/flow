@@ -33,12 +33,13 @@ export component SettingsPage inherits Rectangle {
 				font-size: 20px;
 			}
 			
-			TextInput {
+			minutesInput := TextInput {
 				width: 75%;
 				font-size: 20px;
 				
 				accepted() => {
 					sendMinutes(self.text);
+					sendSeconds(secondsInput.text);
 				}
 			}
 		}
@@ -53,11 +54,12 @@ export component SettingsPage inherits Rectangle {
 				font-size: 20px;
 			}
 			
-			TextInput {
+			secondsInput := TextInput {
 				width: 75%;
 				font-size: 20px;
 				
 				accepted() => {
+					sendMinutes(minutesInput.text);
 					sendSeconds(self.text);
 				}
 			}
@@ -67,6 +69,27 @@ export component SettingsPage inherits Rectangle {
 			text: "By Sliced Technologies ~ Nicola Canzonieri";
 			color: white;
 			font-size: 10px;
+		}
+		
+		HorizontalLayout {
+			height: 10%;
+			alignment: end;
+			
+			applyButton := Button {
+				width: 20%;
+				button-color: #36548b;
+				border-radius: 18px;
+				text: "Apply";
+				id: "apply_settings";
+				font-size: 25px;
+				
+				
+				clicked => {
+					sendMinutes(minutesInput.text);
+					sendSeconds(secondsInput.text);
+				}
+
+			}
 		}
 		
 	}

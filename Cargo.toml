@@ -1,6 +1,6 @@
 [package]
-name = "flow"
-version = "0.1.0"
+name = "Flow_Beta"
+version = "1.0.0"
 edition = "2021"
 build = "build.rs"
 
