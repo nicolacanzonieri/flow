@@ -2,9 +2,12 @@ import { Button } from "../generic/button.slint";
 
 export component ControlBar inherits HorizontalLayout {
     
+	property <bool> timerOn: false;
+	
     callback buttonPressed(string);
-
     spacing: 15px;
+	
+	alignment: stretch;
 
     Button {
         button-color: #36548b;
@@ -28,34 +31,17 @@ export component ControlBar inherits HorizontalLayout {
         button-color: #36548b;
         border-radius: 18px;
         text: "";
-        id: "play";
+        id: timerOn ? "pause" : "play";
         font-size: 25px;
 
         Image {
-            source: @image-url("../svg/play--filled.svg");
+            source: timerOn ? @image-url("../svg/pause--outline--filled.svg") : @image-url("../svg/play--filled.svg");
             colorize: white;
         }
 
         clicked => {
             buttonPressed(self.id);
-        }
-
-    }
-
-    Button {
-        button-color: #36548b;
-        border-radius: 18px;
-        text: "";
-        id: "pause";
-        font-size: 25px;
-
-        Image {
-            source: @image-url("../svg/pause--outline--filled.svg");
-            colorize: white;
-        }
-
-        clicked => {
-            buttonPressed(self.id);
+			timerOn = !timerOn;
         }
 
     }

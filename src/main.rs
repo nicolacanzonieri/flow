@@ -6,7 +6,6 @@ slint::include_modules!();
 fn main() {
 
     let application = Flow::new().unwrap();
-		
 	let weak_minutes = application.as_weak();
 	let weak_seconds = application.as_weak();
 

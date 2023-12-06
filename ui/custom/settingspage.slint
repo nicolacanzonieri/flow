@@ -4,18 +4,36 @@ export component SettingsPage inherits Rectangle {
 
 	callback sendMinutes(string);
 	callback sendSeconds(string);
-	
+	callback close-settings-page;
+
 	VerticalLayout {
 		padding: 11px;
 		spacing: 10px;
 		
 		alignment: start;
 	
-		Text {
-			horizontal-alignment: left;
-			vertical-alignment: center;
-			text: "Settings";
-			font-size: 35px;
+		HorizontalLayout {
+
+			alignment: space-between;
+
+			Text {
+				horizontal-alignment: left;
+				vertical-alignment: center;
+				text: "Settings";
+				font-size: 35px;
+			}
+
+			Image {
+				source: @image-url("../svg/close--filled.svg");
+				colorize: white;
+				max-width: 60px;
+
+				TouchArea {
+					clicked => {
+						close-settings-page();
+					}
+				}
+			}
 		}
 		
 		Rectangle {
